@@ -5,9 +5,16 @@ describe("Inspect automation test store first item using chain of commands", () 
     cy.get("#block_frame_featured_1769 > .thumbnails > :nth-child(1) > .fixed_wrapper > .fixed > .prdocutname").click();
   });
 
-  it("Click on first item using item text", () => {
+  it.only("Click on first item using item text", () => {
     cy.visit("http://automationteststore.com/");
-    cy.get(".productname").contains("Skinsheen Bronzer Stick").click();
+    cy.get(".prdocutname")
+      .contains("Skinsheen Bronzer Stick")
+      .click()
+      .then(($itemHeader) => {
+        // console.log("Header is " + $itemHeader.text());
+        const headerText = $itemHeader.text();
+        cy.log("Header is " + headerText);
+      });
   });
 
   it("click on first item using index", () => {
